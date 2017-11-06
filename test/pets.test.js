@@ -40,6 +40,8 @@ describe('<Resource Name Here> API', () => {
         return request.get('/api/pets')
             .then(({ body }) => {
                 assert.equal(body.length, 2);
+                assert.equal(quag.name, body[0].name);
+                assert.equal(bubdow.name, body[1].name);
             });
     });
 
