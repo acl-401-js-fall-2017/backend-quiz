@@ -45,10 +45,13 @@ describe('<Resource Name Here> API', () => {
                 .send(pet)
                 .then(res => res.body);
         }))
-        .then( savedPets => {
-            return request
-        })
+            .then(() => {
+                return request.get('/api/pets')
+                    .then(pets => {
+                        assert.deepEqual(pets.length, 2);
+                    });
+            });
 
-    })
+    });
 
 });
