@@ -4,7 +4,7 @@ const assert = require('chai').assert;
 const Pet = require('../lib/models/pet');
 const Rave = require('../lib/models/rave');
 
-describe('Pets API', () => {
+describe('Pets / Raves API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
 
@@ -94,7 +94,12 @@ describe('Pets API', () => {
     it('should get all raves from db plus pet name and type', () => {
         return request.get('/api/raves/')
             .then( got => {
+                //TODO: remember how to format [0].foo.bar in asserts
+                const testName = got.body[0].name.name;
+                const testType = got.body[0].name.type;
                 assert.equal(got.body.length, 4);
+                assert.ok(testName);
+                assert.ok(testType);
             });
     });
 
