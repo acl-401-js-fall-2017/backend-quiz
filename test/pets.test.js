@@ -47,4 +47,26 @@ describe('Pet API', () => {
             });
     });
 
+    it('GET request returns both pets', () => {
+        const promiseAllPets = [
+            request.post('/api/pets')
+                .send(petData[0]),
+            request.post('/api/pets')
+                .send(petData[1])
+        ];
+
+        return Promise.all(promiseAllPets)
+            .then(resArray => {
+                resArray = resArray.map(res => {
+                    return {
+                        name: res.body.name
+                    };
+                });
+                return request.get('/api/pets')
+                    .then(received => {
+                        assert.deepEqual(received.body.name, resArray.name);
+                    });
+            });
+    });
+
 });
