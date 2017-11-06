@@ -14,7 +14,7 @@ describe('Pet Raves API', () => {
             breed: 'retriever',
             catchPhrase: 'woof woof'
         };
-        
+
     });
 
     it('saves a pet', () => {
@@ -30,7 +30,8 @@ describe('Pet Raves API', () => {
             .send(petDog)
             .then(res => {
                 const pet = res.body;
-                assert.equal(pet.name, 'Fido');   
+                assert.equal(pet.name, 'Fido');
+                assert. 
             });
 
     });
