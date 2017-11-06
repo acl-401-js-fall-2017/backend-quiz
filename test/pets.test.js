@@ -6,8 +6,8 @@ describe('<Resource Name Here> API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
 
-    // remove me!
-    it('is a test', () => {
+    it('Should save a pet with an id', () => {
+        return request.post()
         assert.isOk(request);
     });
 
