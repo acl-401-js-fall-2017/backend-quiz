@@ -27,9 +27,24 @@ describe('Pet API', () => {
 
     // remove me!
     it('Posts two pets, each different type', () => {
-        return request.post('/api/pets')
-            .send(petData)
-            .then(res => assert.ok(res.body));
+
+        const promiseAllPets = [
+            request.post('/api/pets')
+                .send(petData[0]),
+            request.post('/api/pets')
+                .send(petData[1])
+        ];
+
+        return Promise.all(promiseAllPets)
+            .then(resArray => {
+                resArray = resArray.map(res => {
+                    return {
+                        type: res.body.type,
+                        _id: res.body._id
+                    };
+                });
+                assert.ok(resArray);
+            });
     });
 
 });
