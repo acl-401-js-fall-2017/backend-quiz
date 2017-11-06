@@ -16,8 +16,7 @@ describe('Pets API', () => {
         }
     };
 
-    it.only('saves a pet with an id', () => {
-        // let savedPet = null;
+    it.only('saves a pet with an id', () => {        
         return request.post('/api/pets')
             .send(animals)
             .then(res => {
