@@ -85,7 +85,7 @@ describe('Pets API', () => {
     it('should return both pets that were posted', () => {
         return request.get('/api/pets/')
             .then( got => {
-                assert.equal(got.length, 2);
+                assert.equal(got.body.length, 2);
             });
     });
 
