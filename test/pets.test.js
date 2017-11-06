@@ -4,7 +4,7 @@ const assert = require('chai').assert;
 
 describe('<Resource Name Here> API', () => {
     
-    beforeEach(() => mongoose.connection.dropDatabase());
+    before(() => mongoose.connection.dropDatabase());
 
     let pets = [
         {
@@ -51,11 +51,12 @@ describe('<Resource Name Here> API', () => {
                 });
         });
 
-        it('posts two raves from a single user: should fail', () => {
+        it('posts two raves from different users', () => {
 
             raves[0].pet = savedPets[0]._id;
             raves[1].pet = savedPets[1]._id;
-            raves[0].email = raves[1].email = 'tri@bro.com';
+            raves[0].email = 'tri@bro.com';
+            raves[1].email = 'mike@bro.com';
 
             const saveRaves = [
                 request.post('/api/raves').send(raves[0]).then(res => res.body),
