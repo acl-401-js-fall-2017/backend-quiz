@@ -4,6 +4,7 @@ const assert = require('chai').assert;
 const Pet = require('../lib/models/pet');
 const Rave = require('../lib/models/rave');
 
+//TODO: make routes return error when applicable 
 describe('Pets / Raves API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
@@ -36,7 +37,7 @@ describe('Pets / Raves API', () => {
             })
             .then( () => {
                 const bobRaveOne = { 
-                    name: dogId,
+                    pet: dogId,
                     comments: 'it stinks',
                     email: 'bob@aol.com'
                 };
@@ -45,7 +46,7 @@ describe('Pets / Raves API', () => {
             })
             .then( () => {
                 const bobRaveTwo = new Rave({ 
-                    name: catId,
+                    pet: catId,
                     comments: 'I like it!!!',
                     email: 'bob@aol.com'
                 });
@@ -54,7 +55,7 @@ describe('Pets / Raves API', () => {
             })
             .then( () => {
                 const jeffRaveOne = new Rave({ 
-                    name: dogId,
+                    pet: dogId,
                     comments: 'very good',
                     email: 'jeff@aol.com'
                 });
@@ -63,7 +64,7 @@ describe('Pets / Raves API', () => {
             })
             .then( () => {
                 const jeffRaveTwo = { 
-                    name: catId,
+                    pet: catId,
                     comments: 'no thank you',
                     email: 'jeff@aol.com'
                 };
@@ -74,8 +75,6 @@ describe('Pets / Raves API', () => {
 
 
     
-    // 1. **Test** that `GET` `/raves` returns all four raves plus pet name and type
-    // 1. **Test** that `GET` `/pets/:id` for one of the pets returns all fields and has the two raves
 
     it('should return both pets that were posted', () => {
         return request.get('/api/pets/')
@@ -95,12 +94,17 @@ describe('Pets / Raves API', () => {
         return request.get('/api/raves/')
             .then( got => {
                 //TODO: remember how to format [0].foo.bar in asserts
-                const testName = got.body[0].name.name;
-                const testType = got.body[0].name.type;
+                const testName = got.body[0].pet.name;
+                const testType = got.body[0].pet.type;
                 assert.equal(got.body.length, 4);
                 assert.ok(testName);
                 assert.ok(testType);
             });
     });
+
+    // it('should return  ')
+
+    // 1. **Test** that `GET` `/pets/:id` for one of the pets returns all fields and has the two raves
+
 
 });
