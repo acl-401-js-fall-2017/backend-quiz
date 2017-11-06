@@ -38,4 +38,17 @@ describe('<Resource Name Here> API', () => {
             });
     });
 
+    it('should get all pets', () => {
+        const testPets = [testPet1, testPet2];
+        return Promise.all(testPets.map( pet => {
+            return request.post('/api/pets')
+                .send(pet)
+                .then(res => res.body);
+        }))
+        .then( savedPets => {
+            return request
+        })
+
+    })
+
 });
