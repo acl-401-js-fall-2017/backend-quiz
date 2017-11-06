@@ -54,7 +54,7 @@ describe('<Resource Name Here> API', () => {
 
     });
 
-    it('Should get pet by id', () => {
+    it.skip('Should get pet by id', () => {
         let testSavePet = null; 
         return request.post('/api/pets')
             .send(testPet1)
