@@ -6,7 +6,7 @@ describe('<Resource Name Here> API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
     let savedRave1 = null; 
-    let savedRave2 = null;
+    //let savedRave2 = null;
     
     let savedPetsArray = null;
     const testPet1 = {
@@ -37,11 +37,11 @@ describe('<Resource Name Here> API', () => {
                     comments: 'I love this pet!',
                     email: 'smoyo@me.com'
                 };
-                savedRave2 = {
-                    pet: savedPetsArray[1]._id,
-                    comments: 'this is the best test!',
-                    email: 'notshane@me.com'
-                };
+                // savedRave2 = {
+                //     pet: savedPetsArray[1]._id,
+                //     comments: 'this is the best test!',
+                //     email: 'notshane@me.com'
+                // };
 
 
             });
