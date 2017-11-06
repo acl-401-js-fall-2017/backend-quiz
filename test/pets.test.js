@@ -80,6 +80,13 @@ describe('<Resource Name Here> API', () => {
                 });
         });
 
+        it('gets pets by type', () => {
+            return request.get('/api/pets?type=dog')
+                .then(({body: res}) => {
+                    assert.ok(res[0].type === 'dog');
+                });
+        });
+
         it('gets all raves', () => {
             return request.get('/api/raves')
                 .then(({body: res}) => {
