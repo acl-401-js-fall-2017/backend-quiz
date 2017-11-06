@@ -24,14 +24,55 @@ describe('<Resource Name Here> API', () => {
             catchPhrase: '...'
         });
 
+        let dogId = null;
+        let catId = null;
+
         return request.post('/api/pets/').send(dog)
-            .then( () => request.post('/api/pets/').send(cat));
+            .then( sent => {
+                dogId = sent.id;
+                request.post('/api/pets/').send(cat);
+            })
+            .then( sent => {
+                catId = sent.id;
+            })
+            .then( () => {
+                const bobRaveOne = { 
+                    name: dogId,
+                    comments: 'it stinks',
+                    email: 'bob@aol.com'
+                };
+
+                return request.post('/api/raves/').send(bobRaveOne);
+            })
+            .then( () => {
+                const bobRaveTwo = { 
+                    name: catId,
+                    comments: 'I like it!!!',
+                    email: 'bob@aol.com'
+                };
+
+                return request.post('/api/raves/').send(bobRaveTwo);
+            })
+            .then( () => {
+                const jeffRaveOne = { 
+                    name: dogId,
+                    comments: 'very good',
+                    email: 'jeff@aol.com'
+                };
+
+                return request.post('/api/raves/').send(jeffRaveOne);
+            })
+            .then( () => {
+                const jeffRaveTwo = { 
+                    name: catId,
+                    comments: 'no thank you',
+                    email: 'jeff@aol.com'
+                };
+
+                return request.post('/api/raves/').send(jeffRaveTwo);
+            });
     });
 
-    beforeEach(() => {
-        const dogId = null;
-        const catId = null;
-    });
 
     // 1. POST two pets, each of a different type
     // 1. POST two raves from a single user emails to both of the pets from prior step.
