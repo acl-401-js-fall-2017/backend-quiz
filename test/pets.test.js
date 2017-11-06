@@ -48,7 +48,9 @@ describe('<Resource Name Here> API', () => {
             .then(() => {
                 return request.get('/api/pets')
                     .then(pets => {
-                        assert.deepEqual(pets.length, 2);
+                        console.log('I AM PETS!!', pets);
+                        console.log('I AM PETS!!', pets.body);
+                        assert.deepEqual(pets.body.length, 2);
                     });
             });
 

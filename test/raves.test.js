@@ -31,7 +31,6 @@ describe('<Resource Name Here> API', () => {
         }))
             .then( savedPets => {
                 savedPetsArray = savedPets;
-                console.log(' i am pets', savedPetsArray);
                 savedRave1 = {
                     pet: savedPetsArray[0]._id,
                     comments: 'I love this pet!',
