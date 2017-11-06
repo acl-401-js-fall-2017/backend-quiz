@@ -16,7 +16,7 @@ describe('Pets API', () => {
         }
     };
 
-    it.only('saves a pet with an id', () => {        
+    it('saves a pet with an id', () => {        
         return request.post('/api/pets')
             .send(animals)
             .then(res => {
@@ -26,7 +26,7 @@ describe('Pets API', () => {
             });
     });
 
-    it.skip('gets all pets by name', () => {
+    it('gets all pets by name', () => {
         
         const pet1 = {
             name: 'Milo',
