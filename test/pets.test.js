@@ -60,7 +60,7 @@ describe('<Resource Name Here> API', () => {
 
             const saveRaves = [
                 request.post('/api/raves').send(raves[0]).then(res => res.body),
-                request.post('/api/raves').send(raves[0]).then(res => res.body)
+                request.post('/api/raves').send(raves[1]).then(res => res.body)
             ];
             return Promise.all(saveRaves)
                 .then(res => {
@@ -78,11 +78,12 @@ describe('<Resource Name Here> API', () => {
                     assert.ok(names.includes('Milk'));
                     assert.ok(names.includes('Oreo'));
                 });
-            });
-            it('gets all raves', () => {
-                return request.get('/api/raves')
+        });
+
+        it('gets all raves', () => {
+            return request.get('/api/raves')
                 .then(({body: res}) => {
-                    assert.ok(res.length === 2);
+                    assert.ok(res.length === 2);                    
                     let names = res.map(rave => rave.pet.name);
                     let types = res.map(rave => rave.pet.type);
                     assert.ok(names.includes('Milk'));
