@@ -27,7 +27,7 @@ describe('Pet API', () => {
 
     // remove me!
     it('Posts two pets, each different type', () => {
-
+        
         const promiseAllPets = [
             request.post('/api/pets')
                 .send(petData[0]),
@@ -69,5 +69,7 @@ describe('Pet API', () => {
                     });
             });
     });
+
+
 
 });
