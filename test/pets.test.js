@@ -9,6 +9,9 @@ describe('Pets / Raves API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
 
+    let dogId = null;
+    let catId = null;
+
     beforeEach(() => {
         const dog = new Pet({
             name: 'DogFriend123',
@@ -23,9 +26,6 @@ describe('Pets / Raves API', () => {
             breed: 'Normal',
             catchPhrase: '...'
         });
-
-        let dogId = null;
-        let catId = null;
 
         return request.post('/api/pets/').send(dog)
             .then( sent => {
@@ -73,9 +73,6 @@ describe('Pets / Raves API', () => {
             });
     });
 
-
-    
-
     it('should return both pets that were posted', () => {
         return request.get('/api/pets/')
             .then( got => {
@@ -102,7 +99,15 @@ describe('Pets / Raves API', () => {
             });
     });
 
-    // it('should return  ')
+    it('should return pet by id and include all associated raves', () => {
+        return request.get(`/api/pets/${dogId}`)
+            .then( got => {
+                const testType = got.body[0].type;
+                const testRaves = got.body[0].raves;
+                assert.equal(testType, 'Dog');
+                assert.equal(testRaves.length, 2);
+            });
+    });
 
     // 1. **Test** that `GET` `/pets/:id` for one of the pets returns all fields and has the two raves
 
