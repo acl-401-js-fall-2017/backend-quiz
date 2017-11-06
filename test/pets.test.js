@@ -1,11 +1,9 @@
 const request = require('./request');
 const mongoose = require('mongoose');
 const assert = require('chai').assert;
-const Pet = require('../../lib/models/pet');
+const Pet = require('../lib/models/pet');
 
-
-
-describe('<Resource Name Here> API', () => {
+describe('Pets API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
 
@@ -82,6 +80,13 @@ describe('<Resource Name Here> API', () => {
     // 1. **Test** that `GET` `/pets?type=<one of the pet types>` only returns the one pet of that type
     // 1. **Test** that `GET` `/raves` returns all four raves plus pet name and type
     // 1. **Test** that `GET` `/pets/:id` for one of the pets returns all fields and has the two raves
+
+    it('should return both pets that were posted', () => {
+        return request.get('/api/pets/')
+            .then( got => {
+                assert.equal(got.length, 2);
+            });
+    });
 
     // remove me!
     it('is a test', () => {
