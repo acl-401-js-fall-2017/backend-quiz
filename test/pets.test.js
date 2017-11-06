@@ -69,4 +69,15 @@ describe('<Resource Name Here> API', () => {
         });
     });
 
+    describe('GET', () => {
+        it('gets both pets', () => {
+            return request.get('/api/pets')
+                .then(({body: res}) => {
+                    assert.ok(res.length === 2);
+                    let names = res.map(pet => pet.name);
+                    assert.ok(names.includes('Milk'));
+                    assert.ok(names.includes('Oreo'));
+                });
+        });
+    });
 });
