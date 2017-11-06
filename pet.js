@@ -6,8 +6,19 @@ const petSchema = new Schema({
         type: String,
         required: true
     },
-    dob: Date,
-    pob: String
+
+    type: {
+        array: ['cat','dog','bird','fish','snake'],
+        required: true
+    },
+
+    breed: String,
+    
+    catchPhrase: {
+        type: Number, 
+        max: 65 
+    }
+    
 });
 
 module.exports = mongoose.model('Pet', petSchema);
