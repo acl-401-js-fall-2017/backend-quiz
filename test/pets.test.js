@@ -2,13 +2,25 @@ const request = require('./request');
 const mongoose = require('mongoose');
 const assert = require('chai').assert;
 
-describe('<Resource Name Here> API', () => {
+describe('Pets API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
 
-    // remove me!
-    it('is a test', () => {
-        assert.isOk(request);
+    const testPet = {
+        name: 'Hunter',
+        type: 'dog',
+        breed: 'mutt',
+        catchPhrase: 'wonderful puppy!!'
+    };
+
+    it('saves a pert', () => {
+        return request.post('/api/pets')
+            .send(testPet)
+            .then(({ body }) => {
+                assert.equal(body.name, testPet.name);
+            });
     });
 
 });
+
+
