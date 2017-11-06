@@ -41,22 +41,21 @@ describe('Pet API', () => {
     it.only('gets both pets', () => {
 
         let petCollection = [pet1, pet2].map(item => {
-            return request.post('/pets')
+            return request.post('/api/pets')
                 .send(item)
                 .then(res => res.body);
         });
 
-        let saved = null;
+        let saved = null; //eslint-disable-line
         return Promise.all(petCollection)
             .then(_saved => {
                 saved = _saved;
                 return request.get('/api/pets');
             })
             .then(res => {
-                assert.deepEqual(res.body, saved);
-            // assert.equal(res.body[1].pob, 'Concord CA');
-            // assert.equal(res.body[1].dob.slice(0, 4), 1956);
-            // assert.equal(res.body[1].name, 'Tom Hanks');
+                assert.equal(res.body[0].name, 'Shadow');
+                assert.equal(res.body[1].name, 'Harley');
+                // assert.equal(saved.body.length, 2);
             });
 
     });
