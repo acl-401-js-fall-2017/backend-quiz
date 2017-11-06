@@ -71,6 +71,19 @@ describe('<Resource Name Here> API', () => {
             });
     });
 
+    // it('should get all raves', () => {
+    //     const raveArray = [savedRave1, savedRave2];
+    //     return Promise.all(raveArray.map( rave => {
+    //         return request.post('/api/raves')
+    //             .send(rave)
+    //             .then( res => res.body);
+    //     }))
+    //         .then(()=> {
+    //             return request.get('/api/raves');
+    //         });
+
+    // });
+
 
 
 
