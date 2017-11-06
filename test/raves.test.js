@@ -6,7 +6,7 @@ describe('<Resource Name Here> API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
     let savedRave1 = null; 
-    //let savedRave2 = null;
+    let savedRave2 = null;
     
     let savedPetsArray = null;
     const testPet1 = {
@@ -37,11 +37,11 @@ describe('<Resource Name Here> API', () => {
                     comments: 'I love this pet!',
                     email: 'smoyo@me.com'
                 };
-                // savedRave2 = {
-                //     pet: savedPetsArray[1]._id,
-                //     comments: 'this is the best test!',
-                //     email: 'notshane@me.com'
-                // };
+                savedRave2 = {
+                    pet: savedPetsArray[1]._id,
+                    comments: 'this is the best test!',
+                    email: 'smoyo@me.com'
+                };
 
 
             });
@@ -56,6 +56,23 @@ describe('<Resource Name Here> API', () => {
                 assert.deepEqual(savedRave.comments, savedRave1.comments);
             });
     });
+
+    it('Should save a  2 raves from a single email address to two pets', () => {
+        const testRaves = [savedRave1, savedRave2];
+        return Promise.all(testRaves.map(rave => {
+            return request.post('/api/raves')
+                .send(rave)
+                .then(res => res.body);
+        }))
+            .then( savedRaves => {
+                assert.isOk(savedRaves[0]._id);
+                assert.isOk(savedRaves[1]._id);
+                assert.deepEqual(savedRaves[0].comments, savedRave1.comments);
+                assert.deepEqual(savedRaves[1].comments, savedRave2.comments);
+            });
+    });
+
+
 
 
 
