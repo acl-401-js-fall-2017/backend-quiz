@@ -89,9 +89,11 @@ describe('Pets API', () => {
             });
     });
 
-    // remove me!
-    it('is a test', () => {
-        assert.isOk(request);
+    it('should get a pet by chosen type', () => {
+        return request.get('/api/pets?type=cat')
+            .then( got => {
+                assert.equal(got.body.type, 'cat');
+            });
     });
 
 });
