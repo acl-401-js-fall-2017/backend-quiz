@@ -90,7 +90,7 @@ describe('Pets API', () => {
     });
 
     it('should get a pet by chosen type', () => {
-        return request.get('/api/pets?type=cat')
+        return request.get('/api/pets/getPet?type=cat')
             .then( got => {
                 assert.equal(got.body.type, 'cat');
             });
