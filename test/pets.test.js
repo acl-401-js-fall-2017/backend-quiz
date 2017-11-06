@@ -6,53 +6,58 @@ describe('Pet API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
 
-    const pet = [{
+    const pet1 = {
         name: 'Shadow',
         petType: 'dog',
         breed: 'Australian Shepherd Mix',
         catchphrase: 'Frisbee is my middle name'
-    },
-    {
+    };
+    const pet2 = {
         name: 'Harley',
         petType: 'cat',
         breed: 'catlike',
         catchphrase: 'I purr like a motorcycle'
-    }
-    ];
+    };
+
+
     
 
-    it.only('saves a pet', () => {
+    it('saves a pet', () => {
         return request.post('/api/pets')
-            .send(pet[0])
+            .send(pet1)
             .then(({ body }) => {
                 assert.equal(body.name, 'Shadow');
             });
     });
-    
 
+    it('saves a pet', () => {
+        return request.post('/api/pets')
+            .send(pet2)
+            .then(({ body }) => {
+                assert.equal(body.name, 'Harley');
+            });
+    });
+
+    it.only('gets both pets', () => {
+
+        let petCollection = [pet1, pet2].map(item => {
+            return request.post('/pets')
+                .send(item)
+                .then(res => res.body);
+        });
+
+        let saved = null;
+        return Promise.all(petCollection)
+            .then(_saved => {
+                saved = _saved;
+                return request.get('/api/pets');
+            })
+            .then(res => {
+                assert.deepEqual(res.body, saved);
+            // assert.equal(res.body[1].pob, 'Concord CA');
+            // assert.equal(res.body[1].dob.slice(0, 4), 1956);
+            // assert.equal(res.body[1].name, 'Tom Hanks');
+            });
+
+    });
 });
-
-
-
-// const assert = require('chai').assert;
-// const Studio = require('../../lib/models/studio');
-
-// describe('Studio model', () => {
-//     it('check if studio model is good', () => {
-//         const studio = new Studio({
-//             name: 'Paramount Pictures',
-//             address: {
-//                 city: 'Hollywood',
-//                 state: 'California',
-//                 country: 'USA'
-//             }
-//         });
-//         assert.equal(studio.validateSync(), undefined);
-//     });
-
-//     it('checks required fields', () => {
-//         const studio = new Studio({ });
-//         const { errors } = studio.validateSync();
-//         assert.equal(errors.name.kind, 'required');
-//     });
-// });
