@@ -73,6 +73,7 @@ describe('Pets / Raves API', () => {
             });
     });
 
+    
     it('should return both pets that were posted', () => {
         return request.get('/api/pets/')
             .then( got => {
