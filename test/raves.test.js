@@ -10,12 +10,12 @@ describe('Rave API', () => {
 
         raveData = [
             {
-                pet: 'Sam',
+                pet: '5a00defa9ada5f7c826f3395',
                 comments: 'coolest pet ever',
                 email: 'art@coolpets.com',
             },
             {
-                pet: 'Timmy',
+                pet: '5a00df2b1faf7f7c912c73ad',
                 comments: 'coolest pet ever',
                 email: 'art@coolpets.com',
             },
