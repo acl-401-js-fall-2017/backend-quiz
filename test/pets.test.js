@@ -2,6 +2,7 @@ const request = require('./request');
 const mongoose = require('mongoose');
 const assert = require('chai').assert;
 const Pet = require('../lib/models/pet');
+const Rave = require('../lib/models/rave');
 
 describe('Pets API', () => {
     
@@ -27,11 +28,11 @@ describe('Pets API', () => {
 
         return request.post('/api/pets/').send(dog)
             .then( sent => {
-                dogId = sent.id;
-                request.post('/api/pets/').send(cat);
+                dogId = sent.body._id;
+                return request.post('/api/pets/').send(cat);
             })
             .then( sent => {
-                catId = sent.id;
+                catId = sent.body._id;
             })
             .then( () => {
                 const bobRaveOne = { 
@@ -43,20 +44,20 @@ describe('Pets API', () => {
                 return request.post('/api/raves/').send(bobRaveOne);
             })
             .then( () => {
-                const bobRaveTwo = { 
+                const bobRaveTwo = new Rave({ 
                     name: catId,
                     comments: 'I like it!!!',
                     email: 'bob@aol.com'
-                };
+                });
 
                 return request.post('/api/raves/').send(bobRaveTwo);
             })
             .then( () => {
-                const jeffRaveOne = { 
+                const jeffRaveOne = new Rave({ 
                     name: dogId,
                     comments: 'very good',
                     email: 'jeff@aol.com'
-                };
+                });
 
                 return request.post('/api/raves/').send(jeffRaveOne);
             })
