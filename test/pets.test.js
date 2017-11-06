@@ -2,13 +2,13 @@ const request = require('./request');
 const mongoose = require('mongoose');
 const assert = require('chai').assert;
 
-describe('Pet Raves API', () => {
-    var petDog = null;
+describe('Pets API', () => {
+    var pet1 = null;
     
     beforeEach(() => {
         mongoose.connection.dropDatabase();
         
-        petDog =  {
+        pet1 = {
             name: 'Fido',
             type: 'dog',
             breed: 'retriever',
@@ -17,21 +17,13 @@ describe('Pet Raves API', () => {
 
     });
 
-    it('saves a pet', () => {
-
-        // var petCat = {
-        //     name: 'Kitty',
-        //     type: 'cat',
-        //     breed: 'black',
-        //     catchPhase: 'meow meow'
-        // };
+    it('gets a pet', () => {
 
         return request.post('/api/pets')
-            .send(petDog)
+            .send(pet1)
             .then(res => {
                 const pet = res.body;
                 assert.equal(pet.name, 'Fido');
-                assert. 
             });
 
     });
