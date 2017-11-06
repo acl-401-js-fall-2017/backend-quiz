@@ -64,7 +64,8 @@ describe('Pet API', () => {
                 });
                 return request.get('/api/pets')
                     .then(received => {
-                        assert.deepEqual(received.body.name, resArray.name);
+                        assert.deepEqual(received.body[0].name, resArray[0].name);
+                        assert.deepEqual(received.body[1].name, resArray[1].name);
                     });
             });
     });
