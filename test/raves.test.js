@@ -8,6 +8,7 @@ describe('<Resource Name Here> API', () => {
 
     let bubdow = null;
     let quag = null;
+    let bobReview = null;
 
     beforeEach(() => {
         bubdow = {
@@ -33,21 +34,24 @@ describe('<Resource Name Here> API', () => {
             .then(res => quag = res.body);
     });
 
-    it('GET all for pets', () => {
-        return request.get('/api/pets')
-            .then(({ body }) => {
-                assert.equal(body.length, 2);
-                assert.equal(quag.name, body[0].name);
-                assert.equal(bubdow.name, body[1].name);
-            });
+    beforeEach(() => {
+        bobReview = {
+            pet: '59ef87b38e62d836e1c0ee48',
+            comments: 'best animal, like ever',
+            email: 'emaily@mcemailface.com'
+        };
+        return request.post('/api/pets')
+            .send(bobReview)
+            .then(res => bobReview = res.body);
     });
 
-    //Test that GET /pets?type=<one of the pet types>
-    // only returns the one pet of that type
 
-    // it('GET only one type of pet', () => {
-    //     return request.get('/api/pets')
-    //         .then()
-    // });
+
+    it.skip('GET all raves with pet names and types ', () => {
+        return request.get('/api/raves')
+            .then(({ body }) => {
+                assert.equal(body.length, 1);
+            });    
+    });
 
 });
